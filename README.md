@@ -1,3 +1,5 @@
+(Projeto de Angular no Webstorm)
+
 # Angular: Frontend framework
 - Open-source (google)
 - Aplicações web dinâmicas
@@ -48,10 +50,90 @@ ng serve -o #roda o projeto na porta
 
 2. Opção no Webstorm
 - Novo projeto > Angular CLI  > Location muda o nome do projeto > OK
+- Clica em run > http://localhost:4200/
 - Opcionais: SCSS (estilo) é melhor
 - Dúvidas? https://angular.dev/tutoriais/first-app
 
+## Estrutura
+- src/app/ > nela que ficam os componentes e módulos
+- src/assets/ > imagens, arquivos que serão utilizados
+  - vamos usar direto do Django
+- src/environments/ > configs para diferentes ambientes (dev, qa, produção)
+- angular.json > config geral do projeto
+- package.json > lista de dependências
+
+## Componente
+- Unidade básica da interface do Angular (uma pasta)
+- Bloco com: 
+  - template html (o que aparece na tela);
+  - css (estilo);
+  - arquivo typescript (lógica e os dados).
+- Criando componente (src>app>nome-component)
+```bash
+ng generate component nome-component
+```
+### Populando o componente
+- Vai no arquivo: src/app/nome-component/nome-component.component.ts
+- Adicionar no @Component:
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-nome-component',
+  imports: [],
+  standalone: true,
+  templateUrl: './nome-component.component.html',
+  styleUrl: './nome-component.component.css'
+})
+export class NomeComponentComponent {
+  nome: string = "Carlinhos";
+  profissao: string = "Desenvolvedor Web";
+  hobbies: string[] = ["Leitura", "Passear", "Tecnologia", "Jogar Bola"];
+}
+
+- Vai no arquivo: src/app/nome-component/nome-component.component.html
+```html
+<h2>{{nome}}</h2>
+<p>{{profissao}}</p>
+<ul>
+  @for (hobby of hobbies; track hobby) {
+  <li>{{hobby}}</li>
+  }
+</ul>
+```
+### Exibindo o componente no HTML
+- Agora falta inserir o 'nome-componente' pro app:
+1) vai no arquivo: src/app/app.component.ts
+```typescript
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { NomeComponentComponent} from './nome-component/nome-component.component';
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet, NomeComponentComponent],
+  standalone: true,
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent {
+  title = 'projectFrontend';
+}
+```
+2) Agora vai no arquivo: src/app/app.component.html
+- Apaga tudo que tá escrito e cola:
+```html
+<app-nome-component></app-nome-component>
+```
+
+
+
+
+
+
+
+
 ---
+(gerado automaticamente pela IDE)
 # ProjectFrontend
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.13.
