@@ -103,28 +103,49 @@ export class NomeComponentComponent {
 ### Exibindo o componente no HTML
 - Agora falta inserir o 'nome-componente' pro app:
 1) vai no arquivo: src/app/app.component.ts
-```typescript
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { NomeComponentComponent} from './nome-component/nome-component.component';
 
-@Component({
-  selector: 'app-root',
-  imports: [RouterOutlet, NomeComponentComponent],
-  standalone: true,
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
-})
-export class AppComponent {
-  title = 'projectFrontend';
-}
-```
+[//]: # (```typescript)
+
+[//]: # (import { Component } from '@angular/core';)
+
+[//]: # (import { RouterOutlet } from '@angular/router';)
+
+[//]: # (import { NomeComponentComponent} from './nome-component/nome-component.component';)
+
+[//]: # ()
+[//]: # (@Component&#40;{)
+
+[//]: # (  selector: 'app-root',)
+
+[//]: # (  imports: [RouterOutlet, NomeComponentComponent],)
+
+[//]: # (  standalone: true,)
+
+[//]: # (  templateUrl: './app.component.html',)
+
+[//]: # (  styleUrl: './app.component.css')
+
+[//]: # (}&#41;)
+
+[//]: # (export class AppComponent {)
+
+[//]: # (  title = 'projectFrontend';)
+
+[//]: # (})
+
+[//]: # (```)
 2) Agora vai no arquivo: src/app/app.component.html
 - Apaga tudo que tá escrito e cola:
 ```html
 <app-nome-component></app-nome-component>
 ```
-
+---
+## Aula 27/05
+Passos para adicionar componente
+- Configurar typescript
+- Popular HTML
+- Adicionar componente no typescript do app
+- Adicionar componente no html do app
 
 
 
