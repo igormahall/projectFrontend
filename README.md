@@ -22,6 +22,7 @@ node -v
 npm -v
 ```
 - Caso não tenha: https://nodejs.org/en/download (já serve para os dois)
+  - necessário reiniciar após instalação para atualizar variáveis de ambiente 
 - Dica de site: https://www.freecodecamp.org/
 - Instalando Angular CLI (ng)
 ```bash
@@ -141,42 +142,97 @@ export class NomeComponentComponent {
 ```
 ---
 # Aula 27/05
-Passos para adicionar componente
-- Configurar typescript
+- Passos para adicionar componente
+1) Configurar typescript (src/app/perfil/perfil.component.ts)
+2) Popular HTML (src/app/perfil/perfil.component.html)
+3) Adicionar componente no typescript do app (src/app/app.component.ts)
+4) Adicionar componente no html do app (src/app/app.component.html)
+
+5) Ajustar o estilo: src/app/perfil/perfil.component.css
+
+---
+
+
+## Data Binding e Diretivas
+- Ex: {{perfil.nome}} (interpolação)
+  - Dados do typescript aparecem na tela (ts -> html);
+  - Ações do usuário na tela voltam para o componente (html -> ts)
+- Sem o data binding, o que o usuário vê e o que sistema faz estariam separados;
+- Feedback ao usuário
+
+### Property Binding
+- Exemplo: [src]="imagemURL"
+- Interpolação dentro de uma propriedade de uma tag
+- Conecta uma propriedade do HTML -> variável do componente
+
+### Event Binding
+- (click)="mudarTexto()"
+- Liga um evento do DOM a uma função do componente
+
+### Two-way Binding
+- Ex: [(ngModel)]="nome"
+- Variável é atualizada tanto na tela quanto no código
+- TS
+  - nome = '';
+- HTML
+  - <input [(ngModel)]="nome">
+  - <p>Você digitou</p>
+
+- Passo a passo:
+  - 1) No 'perfil.component.ts':
 ```typescript
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-perfil',
-  imports: [],
-  standalone: true,
-  templateUrl: './perfil.component.html',
-  styleUrl: './perfil.component.css'
-})
-export class PerfilComponent {
-  perfil = {
-    username: "carlinhosmaia",
-    nome: "Carlinhos Maia",
-    local: "Manaus",
-    idade: 28,
-    profissao: "Desenvolvedor Web",
-    empresa: "FpfTech",
-    publicacoes: 1145,
-    seguidores: 1743,
-    seguindo: 1549,
-    foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8Q-Xt2NMiDeosqpqpPhJiK55-Phjtn38aA3jDqICM0twVqtrt6v9aZwh95Gzq2F6JKZ4"
-  }
-}
+import {FormsModule} from '@angular/forms';
 ```
-- Popular HTML
-- Adicionar componente no typescript do app
-- Adicionar componente no html do app
+  - 2) Ainda no ts, dentro do Component:
+```typescript
+  imports: [
+  FormsModule
+]
+```
+  - 3) No 'perfil.component.html'':
+```html
+<input [(ngModel)]="nome">
+<p>{{nome}}</p>
+```
 
+### Diretivas
+- Instruções no HTML como mostrar certos elementos
+- Tipos: estruturais e de atributo
 
-
-
-
-
+- Estruturais: mostrar ou esconder algo com base em uma condição
+```html
+@if(){};
+<ul> @for(){<li>...</li>} </ul>;
+@switch (){@case(){} @default{}}
+```
+- de Atributo: mudam o estilo ou comportamento de um elemento já existente;
+```typescript
+listClasses = 'full-width-outlined'
+```
+```html
+<ul [class]="listClasses"></ul>
+```
+- CSS class binding
+```typescript
+emPromocao: boolean = true;
+```
+```html
+<p [class.destaque]="emPromocao">Produto</p>
+```
+- CSS style property binding
+```typescript
+boolFlexbox: boolean = true;
+```
+```html
+<div [style.display]="boolFlexbox ? 'flex' : 'block'">...</div>
+```
+---
+Exercício
+1) Criar componente "Produtos"
+2) Crie valores dos produtos no TS
+3) Crie o estilo no CSS
+4) Crie o HTML
+5) Rode e veja
 
 ---
 (gerado automaticamente pela IDE)

@@ -1,6 +1,6 @@
 <div class="perfil">
   <div class="perfil-stats">
-    <img [src]="perfil.foto" alt="Foto perfil de um dev web"/>
+    <img id="foto-perfil" [src]="perfil.foto" alt="Foto perfil de um dev web"/>
     <div>
       <strong>{{perfil.publicacoes}}</strong><br>Publicações
     </div>
@@ -13,10 +13,12 @@
   </div>
   <div class="perfil-info">
     <h2>{{perfil.nome}}</h2>
-    <p>{{perfil.username}}</p>
+    <p>✔️{{perfil.username}}</p>
     <p>🚩{{perfil.local}}</p>
     <p>📅{{perfil.idade}}</p>
     <p>🧑‍💻{{perfil.profissao}}</p>
     <p>🏭{{perfil.empresa}}</p>
   </div>
+  <input [(ngModel)]="nome">
+  <p>{{nome}}</p>
 </div>
