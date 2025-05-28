@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {PerfilComponent} from './perfil/perfil.component';
-import {ProdutosComponent} from './produtos/produtos.component';
+import {PerfilComponent} from '../perfil/perfil.component';
+import {ProdutosComponent} from '../produtos/produtos.component';
 
 @Component({
   selector: 'app-root',
