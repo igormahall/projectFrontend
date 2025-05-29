@@ -256,21 +256,59 @@ Exercício
 ```bash
 ng generate service services/produto
 ```
-- No arquivo 'produto.service.ts' criado:
+
+### Interface
+- Antes de mexer com o service, precisa mexer com a interface
+- Transforma: object -> type
+- Criar o arquivo: "src/app/interfaces/Produto.ts"
 ```ts
-import { Injectable } from '@angular/core';
-//import {Produto} from '../interfaces/produto';
-
-//@Injectable({providedIn: 'root'})
-export class ProdutoService {
-
-  getProdutos(): Produto[] {
-  return [
-  { nome: 'Notebook', promocao: true },
-  { nome: 'Mouse', promocao: false },
-  { nome: 'Teclado', promocao: true }
-  ]};
+export interface Produto {
+  nome: string;
+  promocao: boolean;
 }
 ```
-- Obs: quando tem 'Injectable' -> o Angular que se encarrega por configurar
-- Teste
+- O código acima cria um tipo Produto que pode ser utilizado no serviço
+---
+- Agora sim, no arquivo 'produto.service.ts' criado:
+
+[//]: # (```ts)
+
+[//]: # (import { Injectable } from '@angular/core';)
+
+[//]: # (import {Produto} from '../interfaces/Produto';)
+
+[//]: # ()
+[//]: # (@Injectable&#40;{providedIn: 'root'}&#41;)
+
+[//]: # (export class ProdutoService {)
+
+[//]: # ()
+[//]: # (  getProdutos&#40;&#41;: Produto[] {)
+
+[//]: # (    return [)
+
+[//]: # (      { nome: 'Notebook', promocao: true },)
+
+[//]: # (      { nome: 'Mouse', promocao: false },)
+
+[//]: # (      { nome: 'Teclado', promocao: true })
+
+[//]: # (    ])
+
+[//]: # (  };)
+
+[//]: # (})
+
+[//]: # (```)
+(Obs: quando tem 'Injectable' -> o Angular que se encarrega por configurar)
+
+### Injeção de Dependência
+- Angular entrega uma instância de uma classe (serviço)
+  - Injetar o servico (getProduto) no componente (produto)
+  - O serviço injeta os dados no componente
+- Vai no 'produtos.component.ts':
+  - Importar: inject, serviço e interface 'produto'
+  - Mudar expor class para: "private produtoService = inject(ProdutoService);"
+  - 'ngOnInit(){this.listaProdutos = this.produtoService.getProdutos();}' vai rodar o serviço no component (é um contrutor do angular);
+- Para aparecer no HTML, precisa atualizar no componente 'listaProdutos':
+  - '@for (p of **listaProdutos**; track p) {'

@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import {ProdutoService} from '../../services/produto.service';
+import {Produto} from '../../interfaces/Produto';
 
 @Component({
   selector: 'app-produtos',
-  standalone: true,
   imports: [],
+  standalone: true,
   templateUrl: './produtos.component.html',
   styleUrl: './produtos.component.css'
 })
 export class ProdutosComponent {
-  produtos = [
-    {nome: 'Notebook', promocao: true},
-    {nome: 'Mouse', promocao: false},
-    {nome: 'Teclado', promocao: true},
-  ]
+  private produtoService = inject(ProdutoService);
+  listaProdutos: Produto[] = [];
+  ngOnInit() {
+    this.listaProdutos = this.produtoService.getProdutos();
+  }
 }
