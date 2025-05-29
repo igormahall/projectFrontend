@@ -1,2 +1,9 @@
-<app-produtos></app-produtos>
-<app-perfil></app-perfil>
+<nav>
+  <a [routerLink]="['/nome']">Nome Componente</a>
+  |
+  <a [routerLink]="['/perfil']">Perfil</a>
+  |
+  <a [routerLink]="['/produtos']">Produtos</a>
+</nav>
+<hr />
+<router-outlet></router-outlet>

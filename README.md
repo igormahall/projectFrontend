@@ -282,7 +282,7 @@ export interface Produto {
 
 [//]: # (export class ProdutoService {)
 
-[//]: # ()
+[//]: #/ ()
 [//]: # (  getProdutos&#40;&#41;: Produto[] {)
 
 [//]: # (    return [)
@@ -312,3 +312,50 @@ export interface Produto {
   - 'ngOnInit(){this.listaProdutos = this.produtoService.getProdutos();}' vai rodar o serviço no component (é um contrutor do angular);
 - Para aparecer no HTML, precisa atualizar no componente 'listaProdutos':
   - '@for (p of **listaProdutos**; track p) {'
+---
+# Aula 29/05
+## Roteamento
+- Angular tem o **RouterModule**, que se responsabiliza pelo controle da navegação;
+- A diretiva especial routerLink roteia sem recarregar a página;
+- Router-outlet é o pedaço que vai atualizando após a escolha do link
+  - "app-routes.rs"
+
+[//]: # (```ts)
+
+[//]: # (import { Routes } from '@angular/router';)
+
+[//]: # (import {NomeComponentComponent} from './components/nome-component/nome-component.component';)
+
+[//]: # (import {PerfilComponent} from './components/perfil/perfil.component';)
+
+[//]: # (import {ProdutosComponent} from './components/produtos/produtos.component';)
+
+[//]: # ()
+[//]: # (export const routes: Routes = [)
+
+[//]: # (  {path: 'nome', component: NomeComponentComponent},)
+
+[//]: # (  {path: 'perfil', component: PerfilComponent},)
+
+[//]: # (  {path: 'produtos', component: ProdutosComponent},)
+
+[//]: # (  {path: '**', redirectTo: 'nome'})
+
+[//]: # (];)
+
+[//]: # (```)
+- depois que alterar o arquivo acima, vai ter que atualizar o 'app.component.ts'
+```ts
+import {RouterOutlet, RouterLink} from '@angular/router';
+    imports: [RouterOutlet, RouterLink]
+```
+- Por fim no app.html:
+```html
+<nav>
+  <a [routerLink]="[/nome]">Nome Componente</a>
+|
+<a [routerLink]="[/perfil]">Perfil</a>
+|
+<a [routerLink]="[/produtos]">Produtos</a>
+  </nav>
+```

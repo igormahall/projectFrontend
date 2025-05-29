@@ -1,5 +1,5 @@
 <ul>
-  @for (p of produtos; track p) {
+  @for (p of listaProdutos; track p) {
     <li [class.promocao]="p.promocao">
       {{p.nome}}
       @if (p.promocao){<span> - Em promoção!</span>}
