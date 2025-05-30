@@ -442,4 +442,62 @@ export class TarefaService {
 ---
 # Aula 30/05: Consumo de APIs com HttpClient
 - HttpClientModule: busca dados de APIs externas (noticias, produtos, ...)
-- 
+- Projeto final: nossa API Django -> Angular
+- Mas hoje, vamos pegar uma API climática (previsão do tempo)
+  - QueryParams: latitude, longitude
+- Endpoint: https://api.open-meteo.com/v1/forecast
+  - lat:-3.117034 | lon:-60.025780 | elevation:61.0
+  - current=temperature_2m,wind_speed_10m
+  - hourly=temperature_2m,relative_humidity_2m,wind_speed_10m
+
+## Ativando o HttpClient no projeto Angular?
+- app.config.ts:
+```bash
+import {provideHttpClient} from '@angular/common/http';
+providers: provideHttpClient()
+```
+## Passo-a-passo
+1) Crie o componente clima
+```bash
+ng g c components/clima
+```
+2) Crie a interface ClimaTable
+```bash
+export interface ClimaTable {
+  time: string;
+  temperature: number,
+  humidity: number,
+  windSpeed: number
+}
+```
+3) Crie o serviço climaService
+```bash
+ng g s services/clima
+```
+```bash
+import {inject, Injectable} from '@angular/core';
+import { ClimaTable } from '../interfaces/ClimaTable';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ClimaService {
+  private http = inject(HttpClient);
+  private apiUrl = 'https://api.open-meteo.com/v1/forecast';
+  private latitude = -3.117034;
+  private longitude = -60.025780;
+
+  getClima(): Observable<any> {
+    const params = [
+      `latitude=${this.latitude}`, `longitude=${this.longitude}`,
+      `current=temperature_2m,wind_speed_10m`,
+      `hourly=temperature_2m,relative_humidity_2m,wind_speed_10m`
+    ].join('&');
+
+    return this.http.get(`${this.apiUrl}?${params}`);
+  }
+}
+```
+4) 
