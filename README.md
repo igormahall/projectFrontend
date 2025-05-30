@@ -434,5 +434,8 @@ export class TarefaService {
 
 [//]: # (```)
 11. Modificar 'app.component.html' (<a [routerLink]="['/tarefas']">Tarefas</a>)
-
-
+- Vamos voltar para a parte avançada
+12. Para fazer o **Toggle**, volta pro 'tarefas.component.ts':
+    13. toggleConcluido(tarefa: Tarefa) {tarefa.concluido = !tarefa.concluido;}
+14. Para fazer o **EventBinding**, volta pro 'tarefas.component.html':
+    15. adicionar ao <li>: (click)="toggleConcluido(tarefa)"
