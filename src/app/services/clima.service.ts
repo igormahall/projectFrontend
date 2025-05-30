@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import { ClimaTable } from '../interfaces/ClimaTable';
+//import { ClimaTable } from '../interfaces/ClimaTable';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
