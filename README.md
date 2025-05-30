@@ -359,3 +359,80 @@ import {RouterOutlet, RouterLink} from '@angular/router';
 <a [routerLink]="[/produtos]">Produtos</a>
   </nav>
 ```
+## Desafio
+**Objetivo**: criar uma lista onde o usuário possa:
+Ver todas as tarefas, clicar para marcar como concluída (opcional, para os avançados)
+Tarefas concluídas devem aparecer com um estilo diferente
+1. Crie uma lista com (pelpo menos) 3 tarefas:
+   2. Estudar Angular, Fazer exercício, fazer atividade
+3. (opcional) faça uma função que faça o toggle de tarefa concluída
+   4. toggle é true => false e false => true
+5. Faça o HTML e o CSS serem dinâmicos
+
+**Passo a Passo**
+1. Criar o componente (standalone, tarefa: titulo, descricao, concluido)
+2. Interface/Serviço (criar as tarefas aqui)
+3. Component TS (ngOnInit(), toggle)
+4. Componente HTML(eventBinding) + CSS
+5. Rotas + app.html
+
+### Solução
+1. Criar componente
+```bash
+ng g c components/tarefas
+```
+2. Criar "interface/Tarefa.ts":
+```ts
+export interface Tarefa {
+  titulo: string;
+  descricao: string,
+  concluido: boolean;
+}
+```
+3. Criar o serviço tarefa
+```bash
+ng g s services/tarefa
+```
+- Editar o 'tarefas.service.ts', adicionando:
+```ts
+import {Tarefa} from '../interfaces/Tarefa';
+
+export class TarefaService {
+  getTarefas(): Tarefa[] {
+    return [
+      { titulo: 'Estudar Angular', descricao: 'Fazer um componente de tarefas', concluido: false },
+      { titulo: 'Exercício', descricao: 'Realizar os exercicios em sala', concluido: false },
+      { titulo: 'Fazer atividade', descricao: 'Fazer a atividade para casa', concluido: false }
+    ]
+  }
+}
+```
+4. Modificar 'tarefas.ts':
+   5. importar inject, tarefa.service e interface Tarefa
+   6. criar a injeção (private tarefaService = inject(TarefaService);)
+   7. criar o ngOnInit (this.listaTarefas = this.tarefaService.getTarefas();)
+   8. (depois volta pra fazer o toggle)
+8. Modificar 'tarefas.html:
+   9. voltar depois pra fazer o event binding
+```html
+<ol>
+  @for (tarefa of listaTarefas; track tarefa) {
+  <li [style.color]="tarefa.concluido ? 'green' : 'black'">
+    {{tarefa.titulo}} > {{tarefa.descricao}}
+  </li>
+  }
+</ol>
+```
+9. Modificar 'tarefas.css' (*{font-family: Arial, sans-serif;})
+10. Modificar 'apps.routes.ts'
+
+[//]: # (```ts)
+
+[//]: # (import {TarefasComponent} from './components/tarefas/tarefas.component';)
+
+[//]: # ({path: 'tarefas', component: TarefasComponent})
+
+[//]: # (```)
+11. Modificar 'app.component.html' (<a [routerLink]="['/tarefas']">Tarefas</a>)
+
+
