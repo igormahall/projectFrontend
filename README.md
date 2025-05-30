@@ -439,3 +439,7 @@ export class TarefaService {
     13. toggleConcluido(tarefa: Tarefa) {tarefa.concluido = !tarefa.concluido;}
 14. Para fazer o **EventBinding**, volta pro 'tarefas.component.html':
     15. adicionar ao <li>: (click)="toggleConcluido(tarefa)"
+---
+# Aula 30/05: Consumo de APIs com HttpClient
+- HttpClientModule: busca dados de APIs externas (noticias, produtos, ...)
+- 
