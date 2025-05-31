@@ -539,3 +539,30 @@ export class ClimaComponent {
   }
 }
 ```
+5) clima.html
+```bash
+<div class="data-info">
+  <p>Latitude: {{climaData.latitude}}</p>
+  <p>Longitude: {{climaData.longitude}}</p>
+  <p>Elevação: {{climaData.elevation}}</p>
+  <p>Data: {{date}}</p>
+  <p>Temperatura: {{climaData.current.temperature_2m}}ºC</p>
+  <p>Vento: {{climaData.current.wind_speed_10m}} m/s</p>
+</div>
+<table>
+  <tr>
+    <th>Hora</th>
+    <th>Temperatura</th>
+    <th>Humidade</th>
+    <th>Vento</th>
+  </tr>
+  @for (data of dataTable; track data) {
+    <tr>
+      <td>{{data.time}}</td>
+      <td>{{data.temperature}}ºC</td>
+      <td>{{data.humidity}}%</td>
+      <td>{{data.windSpeed}} m/s</td>
+    </tr>
+  }
+</table>
+```
